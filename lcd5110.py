@@ -9,9 +9,9 @@ class LCD5110:
 
     def __init__(self):
         # Define each P1 header pin
-        self.RST = 16
-        self.DC = 18
-        self.LED = 15
+        self.RST = 21
+        self.DC = 26
+        self.LED = 18
         self.MOSI = 19  # DN on LCD module
         self.SCLK = 23
         self.CE0 = 24   # SCE on LCD module

@@ -11,10 +11,10 @@ This library utilises Raspberry Pi SPI0 interfaces together with other GPIO pins
 |:-------:|:--------------------------:|  
 |CLK |P1-23 (SPI0 - SCLK) |
 |DN  |P1-19 (SPI0 - MOSI) |
-|DC  |P1-18 (BCM 24) |
-|RST |P1-16 (BCM 23) |
+|DC  |P1-26 (BCM 7) |
+|RST |P1-21 (BCM 9) |
 |SCE |P1-24 (BCM 8, SPI0 - CE0) |
-|LED |P1-15 (BCM 22) |
+|LED |P1-18 (BCM 24) |
 |GND |P1-20 or P1-1 (GND) |
 |VCC |P1-17 or P1-6 (3v3) |
 
