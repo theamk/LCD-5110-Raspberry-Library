@@ -10,15 +10,17 @@ This library utilises Raspberry Pi SPI0 interfaces together with other GPIO pins
 | **LCD Pin** | **P1 header pin (BCM port)** |
 |:-------:|:--------------------------:|  
 |CLK |P1-23 (SPI0 - SCLK) |
-|DN |P1-19 (SPI0 - MOSI) |
-|DC |P1-18 (BCM 24) |
+|DN  |P1-19 (SPI0 - MOSI) |
+|DC  |P1-18 (BCM 24) |
 |RST |P1-16 (BCM 23) |
-|SCE |P1-24 (SPI0 - CE0) |
+|SCE |P1-24 (BCM 8, SPI0 - CE0) |
 |LED |P1-15 (BCM 22) |
-|GND |P1-6 (GND) |
-|VCC |P1-1 (3v3) |
+|GND |P1-20 or P1-1 (GND) |
+|VCC |P1-17 or P1-6 (3v3) |
 
-* P1-15 connects to LED pin via a 220-ohm resistor to restrict the LED current.
+* On some boards, P1-15 connects to LED pin via a 220-ohm resistor to restrict the LED current.
+You need to try connecting LED to Vcc via ammeter -- if the current is less than 5mA, there 
+is no need for the resistor. If the current is greater, you do need one.
 
 ## API for LCD5110 library
 

@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import time
 from lcd5110 import LCD5110
 
@@ -22,9 +23,9 @@ while True:
     lcd.inverse(True)
     lcd.printStr("** Nov 2017 **")
     lcd.inverse(False)
+    lcd.backlight(True)
     time.sleep(5)
 
-    lcd.backlight(True)
     lcd.printImage(eTinkersLogo)
     time.sleep(5)
     lcd.backlight(False)

@@ -11,7 +11,7 @@ class LCD5110:
         # Define each P1 header pin
         self.RST = 16
         self.DC = 18
-        self.LED = 22
+        self.LED = 15
         self.MOSI = 19  # DN on LCD module
         self.SCLK = 23
         self.CE0 = 24   # SCE on LCD module
@@ -24,6 +24,7 @@ class LCD5110:
 
         self.spi = spidev.SpiDev()
         self.spi.open(0, 0)  # open SPI0, use CE0 on GPIO as chip enable
+        self.spi.max_speed_hz = 500*1000
 
         GPIO.output(self.RST, GPIO.HIGH)
         GPIO.output(self.CE0, GPIO.HIGH)
