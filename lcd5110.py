@@ -19,6 +19,11 @@ class LCD5110:
         #self.CE0 = None  # Let SPI controller manage CE
         self.CE0 = 24   # SCE on LCD module
 
+	# Backlight polarity. Red board are often active low, blue ones active high.
+        self.LED_ACTIVE_LOW = True
+        # Contrast (a.k.a. Vop), 0..127. 50 is a good default
+        self.CONTRAST = 50
+
         self._inverse = False
         self._backlight = False
         self.spi = None
@@ -26,6 +31,7 @@ class LCD5110:
 
     def reinit(self):
         """Reinit and clear display"""
+        assert 0 <= self.CONTRAST <= 127
         if self.spi:
            self.spi.close()
         GPIO.setmode(GPIO.BOARD)
@@ -40,9 +46,10 @@ class LCD5110:
         self.backlight(self._backlight)
         if self.CE0 is not None:
             GPIO.output(self.CE0, GPIO.HIGH)
+
         GPIO.output(self.RST, GPIO.HIGH)
         self._write(0, [0x21])  # Set Extended Command set
-        self._write(0, [0xb2])  # Set Vlcd to 6v(LCD Contrast)
+        self._write(0, [0x80 | self.CONTRAST])  # Set Vlcd (LCD Contrast)
         self._write(0, [0x13])  # Set voltage bias system 1: 48(Viewing Angle)
         self._write(0, [0x20])  # Set Normal Command set
         self.clear()         # Clear all display memory and set cursor to 1, 1
@@ -74,7 +81,7 @@ class LCD5110:
 
     def backlight(self, state):
         self._backlight = state
-        GPIO.output(self.LED, GPIO.HIGH if state else GPIO.LOW)
+        GPIO.output(self.LED, GPIO.HIGH if bool(state) != self.LED_ACTIVE_LOW else GPIO.LOW)
 
     def inverse(self, inv):
         self._inverse = inv
